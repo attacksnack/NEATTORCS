@@ -40,7 +40,7 @@ double CParams::dActivationMutationRate   = 0;
 double CParams::dMaxActivationPerturbation= 0;
 
 double CParams::dCompatibilityThreshold   = 0;
-int CParams::iNumBestSweepers             = 4;
+int CParams::iNumBestSweepers             = 1;
 int CParams::iOldAgeThreshold             = 0;
 double CParams::dOldAgePenalty            = 0;
 double CParams::dCrossoverRate            = 0;

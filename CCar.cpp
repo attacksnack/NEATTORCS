@@ -72,5 +72,5 @@ void CCar::EndOfRunCalculations()
 {
 	// Calculate fitness
 	char *argv[] = { "", ""};
-	m_dFitness = clientMain(m_pItsBrain);
+	m_dFitness = runCar(m_pItsBrain);
 }

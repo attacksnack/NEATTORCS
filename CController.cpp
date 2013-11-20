@@ -112,8 +112,6 @@ CController::CController(HWND hwndMain,
 		m_vecBestSweepers.push_back(CMinesweeper());
 	}
 
-
-
 	m_pPop = new Cga(CParams::iPopSize,
 		CParams::iNumInputs,
 		CParams::iNumOutputs);

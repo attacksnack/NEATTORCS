@@ -126,8 +126,8 @@ bool CCarController::Update()
 	}
 
 	//this will call WM_PAINT which will render our scene
-	//InvalidateRect(m_hwndInfo, NULL, TRUE);
-	//UpdateWindow(m_hwndInfo);
+	InvalidateRect(m_hwndInfo, NULL, TRUE);
+	UpdateWindow(m_hwndInfo);
 	return true;
 }
 
@@ -138,7 +138,6 @@ bool CCarController::Update()
 void CCarController::RenderNetworks(HDC &surface)
 {
 	return;
-	/*
 	if (m_iGenerations < 1)
 	{
 		return;
@@ -152,12 +151,14 @@ void CCarController::RenderNetworks(HDC &surface)
 	int	cxInfo = rect.right;
 	int	cyInfo = rect.bottom;
 
-	//now draw the 4 best networks
-	m_vecBestSweepers[0].DrawNet(surface, 0, cxInfo/2, cyInfo/2, 0);
-	m_vecBestSweepers[1].DrawNet(surface, cxInfo/2, cxInfo, cyInfo/2, 0);
-	m_vecBestSweepers[2].DrawNet(surface, 0, cxInfo/2, cyInfo, cyInfo/2);
-	m_vecBestSweepers[3].DrawNet(surface, cxInfo/2, cxInfo, cyInfo, cyInfo/2);
-	*/
+	//now draw the m_cars best networks
+	for(int i = 0; i < m_NumCars; i++)
+	{
+		if(i == 0) m_vecBestCars[0].DrawNet(surface, 0, cxInfo/2, cyInfo/2, 0);
+		else if(i == 1) m_vecBestCars[1].DrawNet(surface, cxInfo/2, cxInfo, cyInfo/2, 0);
+		else if(i == 2) m_vecBestCars[2].DrawNet(surface, 0, cxInfo/2, cyInfo, cyInfo/2);
+		else if(i == 3) m_vecBestCars[3].DrawNet(surface, cxInfo/2, cxInfo, cyInfo, cyInfo/2);
+	}
 }
 
 //------------------------------------Render()--------------------------------------

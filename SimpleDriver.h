@@ -36,7 +36,7 @@ public:
 	SimpleDriver(){stuck=0;clutch=0.0;};
 
 	// SimpleDriver implements a simple and heuristic controller for driving
-	virtual CarControl wDrive(CarState cs);
+	virtual CarControl wDrive(CarState cs, CNeuralNet* brain);
 
 	// Print a shutdown message 
 	virtual void onShutdown();

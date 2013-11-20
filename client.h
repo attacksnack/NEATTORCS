@@ -12,6 +12,6 @@
 
 using namespace std;
 
-int clientMain(CNeuralNet* brain);
+int runCar(CNeuralNet* brain);
 
 #endif /*CLIENT_H_*/

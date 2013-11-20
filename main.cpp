@@ -13,8 +13,8 @@
 
 ///////////////////////GLOBALS ////////////////////////////////////
 
-char*			szApplicationName     = "NEAT minesweepers";
-char*			szWindowClassName     = "sweeper";
+char*			szApplicationName     = "NEAT TORCS cars";
+char*			szWindowClassName     = "car";
 char*     szInfoWindowClassName = "Info Window";
 
 
@@ -398,6 +398,10 @@ int WINAPI WinMain(	HINSTANCE hinstance,
 	
 	//create and show the info window
 	CreateInfoWindow(hwnd);
+
+	// Set fast render, so we can see networks
+	g_pController->FastRenderToggle();
+	g_pController->RenderBestToggle();
 
 	//Show the window
 	ShowWindow(hwnd, SW_SHOWDEFAULT );

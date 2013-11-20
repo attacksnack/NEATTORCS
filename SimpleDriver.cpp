@@ -146,10 +146,66 @@ SimpleDriver::getAccel(CarState &cs)
 }
 
 CarControl
-SimpleDriver::wDrive(CarState cs)
+SimpleDriver::wDrive(CarState cs, CNeuralNet* brain)
 {
 	distRaced = cs.getDistRaced();//cs.getDistFromStart();
 	damage = cs.getDamage();
+
+	//this will store all the inputs for the NN
+	vector<double> inputs;
+	// reading of sensor at +5 degree w.r.t. car axis
+    inputs.push_back(cs.getTrack(10));
+    // reading of sensor parallel to car axis
+    inputs.push_back(cs.getTrack(9));
+    // reading of sensor at -5 degree w.r.t. car axis
+    inputs.push_back(cs.getTrack(8));
+
+	//update the brain and get feedback
+	vector<double> output = brain->Update(inputs, CNeuralNet::active);
+
+	//make sure there were no errors in calculating the 
+	//output
+	if (output.size() < CParams::iNumOutputs) 
+	{
+		return NULL;
+	}
+
+	//assign the outputs to the car's left & right steering as well as it's brake/acceleration
+	float steer = output[0];
+	float accel_and_brake = output[1];
+
+    // compute gear 
+    int gear = getGear(cs);
+
+	/*
+    // normalize steering
+    if (steer < -1)
+        steer = -1;
+    if (steer > 1)
+        steer = 1;
+    */  
+    // set accel and brake from the joint accel/brake command 
+    float accel,brake;
+    if (accel_and_brake>0)
+    {
+        accel = accel_and_brake;
+        brake = 0;
+    }
+    else
+    {
+        accel = 0;
+        // apply ABS to brake
+        brake = filterABS(cs,-accel_and_brake);
+    }
+
+	// Calculate clutching
+    clutching(cs,clutch);
+
+    // build a CarControl variable and return it
+    CarControl cc(accel,brake,gear,steer,clutch);
+    return cc;
+
+	/*
 	// check if car is currently stuck
 	if ( fabs(cs.getAngle()) > stuckAngle )
     {
@@ -169,7 +225,8 @@ SimpleDriver::wDrive(CarState cs)
     	 * pointing in a direction out of track */
     	
     	// to bring car parallel to track axis
-        float steer = - cs.getAngle() / steerLock; 
+        /*
+		float steer = - cs.getAngle() / steerLock; 
         int gear=-1; // gear R
         
         // if car is pointing in the correct direction revert gear and steer  
@@ -224,6 +281,7 @@ SimpleDriver::wDrive(CarState cs)
         CarControl cc(accel,brake,gear,steer,clutch);
         return cc;
     }
+	*/
 }
 
 float
