@@ -1,0 +1,18 @@
+GenomeID: 37
+NetworkDepth: 2
+NumNeurons: 6
+Neuron: 0  Type: 0  Recurrent: 0  Activation: 1  SplitX: 0.1  SplitY: 0
+Neuron: 1  Type: 0  Recurrent: 0  Activation: 0.932205  SplitX: 0.366667  SplitY: 0
+Neuron: 2  Type: 0  Recurrent: 0  Activation: 1  SplitX: 0.633333  SplitY: 0
+Neuron: 3  Type: 3  Recurrent: 0  Activation: 1.03078  SplitX: 0.9  SplitY: 0
+Neuron: 4  Type: 2  Recurrent: 0  Activation: 1  SplitX: 0.333333  SplitY: 1
+Neuron: 5  Type: 2  Recurrent: 0  Activation: 1  SplitX: 0.666667  SplitY: 1
+NumLinks: 8
+InnovID: 6  From: 0  To: 4  Enabled: 1  Recurrent: 0  Weight: -0.406952
+InnovID: 7  From: 0  To: 5  Enabled: 1  Recurrent: 0  Weight: 0.149353
+InnovID: 8  From: 1  To: 4  Enabled: 1  Recurrent: 0  Weight: 0.104675
+InnovID: 9  From: 1  To: 5  Enabled: 1  Recurrent: 0  Weight: -0.110474
+InnovID: 10  From: 2  To: 4  Enabled: 1  Recurrent: 0  Weight: -0.71376
+InnovID: 11  From: 2  To: 5  Enabled: 1  Recurrent: 0  Weight: -0.883698
+InnovID: 12  From: 3  To: 4  Enabled: 1  Recurrent: 0  Weight: -0.278625
+InnovID: 13  From: 3  To: 5  Enabled: 1  Recurrent: 0  Weight: -0.0978394

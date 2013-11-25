@@ -40,7 +40,7 @@ double CParams::dActivationMutationRate   = 0;
 double CParams::dMaxActivationPerturbation= 0;
 
 double CParams::dCompatibilityThreshold   = 0;
-int CParams::iNumBestSweepers             = 1;
+int CParams::iNumBestSweepers             = 2;
 int CParams::iOldAgeThreshold             = 0;
 double CParams::dOldAgePenalty            = 0;
 double CParams::dCrossoverRate            = 0;
@@ -118,6 +118,7 @@ bool CParams::LoadInParameters(char* szFileName)
   grab >> ParamDescription;
   grab >> iMaxNumberOfSpecies;
 
+  if(iNumBestSweepers > iPopSize) iNumBestSweepers = iPopSize;
 
   return true;
 }

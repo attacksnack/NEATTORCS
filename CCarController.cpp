@@ -95,7 +95,7 @@ bool CCarController::Update()
 		}
 
 	//We have completed another generation so now we need to run the GA
-		
+
 	//increment the generation counter
 	++m_iGenerations;
 
@@ -117,12 +117,19 @@ bool CCarController::Update()
 	//grab the NNs of the best performers from the last generation
 	vector<CNeuralNet*> pBestBrains = m_pPop->GetBestPhenotypesFromLastGeneration();
 
-	//put them into our record of the best sweepers
+	//put them into our record of the best sweepers & save them to file
 	for (int i=0; i<m_vecBestCars.size(); ++i)
 	{
 		m_vecBestCars[i].InsertNewBrain(pBestBrains[i]);
 
 		m_vecBestCars[i].Reset();
+
+		// Index 0 is the best genome, index 1 the second best and so on
+
+		string text = string("g") + to_string((long double) (m_iGenerations-1)) + string(".") + to_string((long double) i) + string(".genome");
+
+		//const char *text = "test";//m_iGenerations-1+"."+i; //+"Test";
+		m_pPop->WriteGenome(text.c_str(), i);
 	}
 
 	//this will call WM_PAINT which will render our scene

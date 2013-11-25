@@ -41,7 +41,7 @@ copyright            : (C) 2007 Daniele Loiacono
 /*** defines for UDP *****/
 #define UDP_MSGLEN 1000
 #define UDP_CLIENT_TIMEUOT 1000000
-#define __UDP_CLIENT_VERBOSE__
+//#define __UDP_CLIENT_VERBOSE__
 /************************/
 
 #ifdef WIN32
