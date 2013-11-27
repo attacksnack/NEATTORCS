@@ -23,7 +23,8 @@ copyright            : (C) 2007 Daniele Loiacono
 
 #include "CParams.h"
 
-//#define GRAPHICS
+// 0 = show only stats and network, 1 = show debug windows, 2 = start TORCS (but don't show debug windows), 3 = start TORCS and show debug windows
+#define GRAPHICS 0
 
 #ifdef WIN32
 #include <WinSock.h>
@@ -74,11 +75,14 @@ int runCar(CNeuralNet* brain)
 	//note, you must use the #include <iostream>/ using namespace std
 	//to use the iostream... #incldue "iostream.h" didn't seem to work
 	//in my VC 6
-	AllocConsole();
-	freopen("conin$","r",stdin);
-	freopen("conout$","w",stdout);
-	freopen("conout$","w",stderr);
-	printf("Debugging Window:\n");
+	if(GRAPHICS == 1 || GRAPHICS == 3)
+	{
+		AllocConsole();
+		freopen("conin$","r",stdin);
+		freopen("conout$","w",stdout);
+		freopen("conout$","w",stderr);
+		printf("Debugging Window:\n");
+	}
 
 	SOCKET socketDescriptor;
 	int numRead;
@@ -182,11 +186,12 @@ int runCar(CNeuralNet* brain)
 
 	// Launch server
 	// Notice /c causes cmd to close after executing the command
-	#ifndef GRAPHICS
-	ShellExecute(0, "open", "cmd.exe", "/c \"cd C:\\Program Files (x86)\\torcs\\ & wtorcs.exe -t 10000 -r race_config.xml\"", 0, SW_SHOWNORMAL);
-	#else 
-	ShellExecute(0, "open", "cmd.exe", "/k \"cd C:\\Program Files (x86)\\torcs\\ & wtorcs.exe -t 10000\"", 0, SW_SHOWNORMAL);
-	#endif
+	if(GRAPHICS == 0)
+		ShellExecute(0, "open", "cmd.exe", "/c \"cd C:\\Program Files (x86)\\torcs\\ & wtorcs.exe -t 10000 -r race_config.xml\"", 0, SW_HIDE);
+	else if(GRAPHICS == 1)
+		ShellExecute(0, "open", "cmd.exe", "/c \"cd C:\\Program Files (x86)\\torcs\\ & wtorcs.exe -t 10000 -r race_config.xml\"", 0, SW_SHOWNORMAL);
+	else if(GRAPHICS >= 2)
+		ShellExecute(0, "open", "cmd.exe", "/k \"cd C:\\Program Files (x86)\\torcs\\ & wtorcs.exe -t 10000\"", 0, SW_SHOWNORMAL);
 	// Give server time to start up, before trying to connect with client
 	//Sleep(800);
 
@@ -333,11 +338,10 @@ void parse_args(int argc, char *argv[], char *hostName, unsigned int &serverPort
 	// Set default values
 	maxEpisodes=0;
 	maxSteps=0;
-	#ifdef GRAPHICS
+	if(GRAPHICS >= 2)
 		serverPort=3001;
-	#else
+	else
 		serverPort=3002;
-	#endif
 	strcpy(hostName,"localhost");
 	strcpy(id,"SCR");
 	//    noise=false;

@@ -44,8 +44,6 @@ public:
 
 	void      RenderStats(HDC surface);
 
-	void      Render(HDC surface);
-
 	void      DrawNet(HDC &surface, int cxLeft, int cxRight, int cyTop, int cyBot)
 	{
 		m_pItsBrain->DrawNet(surface, cxLeft, cxRight, cyTop, cyBot);

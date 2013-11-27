@@ -71,7 +71,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd,
 			cyClient = rect.bottom;
 
 			//setup the controller
-			g_pController = new CCarController(hwnd, cxClient, cyClient);//new CController(hwnd, cxClient, cyClient);
+			g_pController = 
+				//new CController(hwnd, cxClient, cyClient);
+				new CCarController(hwnd, cxClient, cyClient);
 
 			//create a surface for us to render to(backbuffer)
 			hdcBackBuffer = CreateCompatibleDC(NULL);
@@ -123,7 +125,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd,
 					}
 
 					//setup the new controller
-					g_pController = new CCarController(hwnd, cxClient, cyClient);//CController(hwnd, cxClient, cyClient);
+					g_pController = 
+						//new CController(hwnd, cxClient, cyClient);
+						new CCarController(hwnd, cxClient, cyClient);
 
 					//give the info window's handle to the controller
 					g_pController->PassInfoHandle(g_hwndInfo); 

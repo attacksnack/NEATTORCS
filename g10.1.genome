@@ -1,4 +1,4 @@
-GenomeID: 23
+GenomeID: 39
 NetworkDepth: 2
 NumNeurons: 6
 Neuron: 0  Type: 0  Recurrent: 0  Activation: 1  SplitX: 0.1  SplitY: 0
@@ -7,13 +7,12 @@ Neuron: 2  Type: 0  Recurrent: 0  Activation: 1  SplitX: 0.633333  SplitY: 0
 Neuron: 3  Type: 3  Recurrent: 0  Activation: 1  SplitX: 0.9  SplitY: 0
 Neuron: 4  Type: 2  Recurrent: 0  Activation: 1  SplitX: 0.333333  SplitY: 1
 Neuron: 5  Type: 2  Recurrent: 0  Activation: 1  SplitX: 0.666667  SplitY: 1
-NumLinks: 9
-InnovID: 6  From: 0  To: 4  Enabled: 1  Recurrent: 0  Weight: -0.0534973
-InnovID: 7  From: 0  To: 5  Enabled: 1  Recurrent: 0  Weight: -0.337128
-InnovID: 8  From: 1  To: 4  Enabled: 1  Recurrent: 0  Weight: 0.102524
-InnovID: 9  From: 1  To: 5  Enabled: 1  Recurrent: 0  Weight: 0.667831
+NumLinks: 8
+InnovID: 6  From: 0  To: 4  Enabled: 1  Recurrent: 0  Weight: -0.363617
+InnovID: 7  From: 0  To: 5  Enabled: 1  Recurrent: 0  Weight: -0.957962
+InnovID: 8  From: 1  To: 4  Enabled: 1  Recurrent: 0  Weight: 0.108475
+InnovID: 9  From: 1  To: 5  Enabled: 1  Recurrent: 0  Weight: 0.745117
 InnovID: 10  From: 2  To: 4  Enabled: 1  Recurrent: 0  Weight: 0.3526
 InnovID: 11  From: 2  To: 5  Enabled: 1  Recurrent: 0  Weight: 0.783142
-InnovID: 12  From: 3  To: 4  Enabled: 1  Recurrent: 0  Weight: -0.481354
-InnovID: 13  From: 3  To: 5  Enabled: 1  Recurrent: 0  Weight: 0.851196
-InnovID: 14  From: 4  To: 4  Enabled: 1  Recurrent: 1  Weight: 0.148346
+InnovID: 12  From: 3  To: 4  Enabled: 1  Recurrent: 0  Weight: 0.0513611
+InnovID: 13  From: 3  To: 5  Enabled: 1  Recurrent: 0  Weight: -0.928543
