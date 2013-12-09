@@ -106,13 +106,39 @@ bool CCarController::Update()
 	vector<CNeuralNet*> pBrains = m_pPop->Epoch(GetFitnessScores());
 
 	//insert the new  brains back into the sweepers and reset their
-	//positions
-	for (int i=0; i<m_NumCars; ++i)
-	{
-		m_vecCars[i].InsertNewBrain(pBrains[i]);
+		//positions
+		// also sum fitness values, so we can report average of this generation
+		float avgFitness = 0;
+		float bestFitness = 0;
+		int i = 0;
+		for (i=0; i<m_NumCars; ++i)
+		{
+			float sweeperFitness = m_vecCars[i].Fitness();
+			if(sweeperFitness > bestFitness) bestFitness = sweeperFitness;
+			avgFitness += sweeperFitness;			
 
-		m_vecCars[i].Reset();
-	}
+			m_vecCars[i].InsertNewBrain(pBrains[i]);
+			m_vecCars[i].Reset();
+		}
+
+		avgFitness /= i;
+
+		// Write average fitness and best fitness for this generation out to be appended to a file
+		std::ofstream outfile;
+		outfile.open("fitnessValues.txt", std::ios_base::app);
+		if(m_iGenerations == 1) {
+			outfile << "         -----------\n"; // Signify new run
+			outfile << "\"Generation\";\"Best\";\"Avg\"\n";
+		}
+		else
+		{
+			outfile << string("\"" + itos(m_iGenerations-1) + "\"");
+			outfile << string(";");
+			outfile << string("\"") << bestFitness << string("\"");
+			outfile << string(";");
+			outfile << string("\"") << avgFitness << string("\"");
+			outfile << "\n";
+		}
 
 	//grab the NNs of the best performers from the last generation
 	vector<CNeuralNet*> pBestBrains = m_pPop->GetBestPhenotypesFromLastGeneration();

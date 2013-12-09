@@ -154,11 +154,14 @@ SimpleDriver::wDrive(CarState cs, CNeuralNet* brain)
 	//this will store all the inputs for the NN
 	vector<double> inputs;
 	// reading of sensor at +5 degree w.r.t. car axis
-    inputs.push_back(cs.getTrack(10));
+	double right = cs.getTrack(11) / 200.0;
+    inputs.push_back(right);
     // reading of sensor parallel to car axis
-    inputs.push_back(cs.getTrack(9));
+	double front = cs.getTrack(9) / 200.0;
+    inputs.push_back(front);
     // reading of sensor at -5 degree w.r.t. car axis
-    inputs.push_back(cs.getTrack(8));
+	double left = cs.getTrack(7) / 200.0;
+    inputs.push_back(left);
 
 	//update the brain and get feedback
 	vector<double> output = brain->Update(inputs, CNeuralNet::active);
